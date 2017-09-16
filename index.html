@@ -11,7 +11,7 @@
 <br>
 <br>
 
-<button id="boton" onclick="generarNumero()">Gnerar Número</button>
+<button id="boton" onclick="generarNumero(1)">Gnerar Número</button>
 <br>
 <br>
 <br>
@@ -32,7 +32,7 @@ function elegirEntre(primerValor,ultimoValor){
     
 	
 	
-function generarNumero(){
+function generarNumero(valor){
 
 	var keys = Object.keys(lista);
 	var texto = 'B   I   N   G   O  <br><br>';
@@ -42,6 +42,8 @@ function generarNumero(){
 	document.getElementById("boton").innerHTML = 'Gnerar Número';
 
 if(keys.length < 75){
+
+	if(valor > 0){
 	
 	if(reinicio == 0){
 		var contador = 0;
@@ -54,7 +56,7 @@ if(keys.length < 75){
 		}	
 		document.getElementById("numero").innerHTML = '<h3>El número es <strong>' + numero + '</strong></h3>';
 	}
-	
+	}
 	if (reinicio != 0) reinicio = 0;
 	
 	
@@ -79,7 +81,7 @@ if(keys.length < 75){
 		texto += '<br>';
 	}
 	document.getElementById("lista").innerHTML = '<h3><pre>' + texto + '</pre></h3>';
-	
+	if(valor > 0){
 	if(Object.keys(lista).length == 75){
 	
 		document.getElementById("mensaje").innerHTML = 'Haga clic para reiniciar el bingo';
@@ -90,8 +92,11 @@ if(keys.length < 75){
 	
 	}
 	
-	
+	}
 }}
+
+generarNumero(0);
+
 </script>
 
 </body>
