@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div style="text-align: center;">
+
+<h1>Bingo</h1>
+<br>
+<div>
+<p id="mensaje">Haga clic para obtener un nuevo número</p>
+<br>
+<br>
+
+<button id="boton" onclick="generarNumero()">Gnerar Número</button>
+<br>
+<br>
+<br>
+<div id = "numero" ></div>
+</div>
+<br>
+<br>
+<div id = "lista" style="position: absolute; top: 20%; left: 10%;"></div>
+<script>
+
+	var lista = {};
+	var reinicio = 0;
+
+function elegirEntre(primerValor,ultimoValor){
+        var opciones = ultimoValor - primerValor + 1;
+        return Math.floor(Math.random() * opciones + primerValor);
+    }
+    
+	
+	
+function generarNumero(){
+
+	var keys = Object.keys(lista);
+	var texto = 'B   I   N   G   O  <br><br>';
+	var k = 1;
+	
+	document.getElementById("mensaje").innerHTML = 'Haga clic para obtener un nuevo número';
+	document.getElementById("boton").innerHTML = 'Gnerar Número';
+
+if(keys.length < 75){
+	
+	if(reinicio == 0){
+		var contador = 0;
+		while(contador == 0){
+			var numero = elegirEntre(1,75);
+			if(!lista[numero]){
+				lista[numero] = numero;
+				contador++;
+			}
+		}	
+		document.getElementById("numero").innerHTML = '<h3>El número es <strong>' + numero + '</strong></h3>';
+	}
+	
+	if (reinicio != 0) reinicio = 0;
+	
+	
+	 
+	 for(var j = 0; j < 15; j++){
+	 
+		for (var i = k; i < 76; i += 15) {
+				
+			if(lista[i]){
+			 
+				if(lista[i] < 10){ 
+					texto += lista[i] + "   ";
+				}else{
+					texto += lista[i] + "  ";
+				}
+				
+			}else{
+				texto += '--- ';
+			}
+		}
+		k++;
+		texto += '<br>';
+	}
+	document.getElementById("lista").innerHTML = '<h3><pre>' + texto + '</pre></h3>';
+	
+	if(Object.keys(lista).length == 75){
+	
+		document.getElementById("mensaje").innerHTML = 'Haga clic para reiniciar el bingo';
+		document.getElementById("boton").innerHTML = 'Reiniciar';
+		document.getElementById("numero").innerHTML = '';
+		lista = {};
+		reinicio = 1;
+	
+	}
+	
+	
+}}
+</script>
+
+</body>
+</html>
